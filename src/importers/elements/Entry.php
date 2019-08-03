@@ -8,6 +8,7 @@ use Craft;
 use barrelstrength\sproutbaseimport\base\ElementImporter;
 use craft\base\Field;
 use craft\elements\Entry as EntryElement;
+use craft\services\EntryRevisions;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -191,7 +192,7 @@ class Entry extends ElementImporter
                 $fieldLayouts = array_merge($fieldLayouts, $layouts);
             }
         }
-
+;
         return $fieldLayouts;
     }
 
@@ -254,18 +255,21 @@ class Entry extends ElementImporter
          */
         $entry = $this->model;
 
-        $revisionsService = Craft::$app->getEntryRevisions();
-
-        $enableVersioning = $settings['enableVersioning'] ?? null;
-
-        // Overrides section default settings
-        if ($enableVersioning === false) {
-            return null;
-        }
-
-        if ($enableVersioning === true || $entry->getSection()->enableVersioning) {
-            $revisionsService->saveVersion($entry);
-        }
+//        /**
+//         * @var $revisionsService EntryRevisions
+//         */
+//        $revisionsService = Craft::$app->entryRevisions;
+//
+//        $enableVersioning = $settings['enableVersioning'] ?? null;
+//
+//        // Overrides section default settings
+//        if ($enableVersioning === false) {
+//            return null;
+//        }
+//
+//        if ($enableVersioning === true || $entry->getSection()->enableVersioning) {
+//            $revisionsService->saveVersion($entry);
+//        }
 
         return null;
     }

@@ -71,13 +71,15 @@ class Categories extends FieldImporter
 
         $source = $settings['source'];
 
-        $groupId = SproutBaseImport::$app->fieldImporter->getElementGroupId($source);
+        $uid = SproutBaseImport::$app->fieldImporter->getElementGroupId($source);
+
+        $category = \craft\records\CategoryGroup::findOne(['uid' => $uid]);
 
         $attributes = null;
 
         if ($source != '*') {
             $attributes = [
-                'groupId' => $groupId
+                'groupId' => $category->id
             ];
         }
 
